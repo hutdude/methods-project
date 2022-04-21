@@ -1,1 +1,4 @@
 
+formatting:
+
+<username>, <password>, <firstname>, <lastname>, <card#>, <expDate>, <secCode>, <address>, <custID>, <prevOrders>
