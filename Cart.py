@@ -1,9 +1,15 @@
+import os
+
+
 class Cart:
 
     def __init__(self, Customer_id):
         self.Customer_id = Customer_id
 
-        cartfile = open("carts.txt", "r")
+        here = os.path.dirname(os.path.abspath(__file__))
+        filename = os.path.join(here, 'carts.txt')
+
+        cartfile = open(filename, "r")
         # initilizes cart id variable at 1 and adds one for every existing cart id, makes new cart_id one more than current number
         counter = 1
         for line in cartfile:
@@ -16,7 +22,7 @@ class Cart:
         self.ISBNs = []
         self.qtys = []
 
-        self.currentTotal = 0
+        self.currentTotal = 0.00
 
     def addItem(self, ISBN, qty, price):
         # checks to see if ISBN already exists in cart. If it does, simply adds the given qty to current
@@ -45,6 +51,9 @@ class Cart:
                 else:
                     return False
         return False
+
+    def getCartId(self):
+        return self.Cart_id
 
     def getCSTid(self):
         return self.Customer_id
