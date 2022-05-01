@@ -1,6 +1,7 @@
 import os
 
 
+
 class Inventory:
 
     def __init__(self):
@@ -18,7 +19,7 @@ class Inventory:
             lines = f_contents.splitlines()
                 
             for x in lines:        
-             isbn_content = x.split(',')
+             isbn_content = x.split("<"|">"|",")
              self.isbns.append(isbn_content)
              qty_content = int(x)
              self.qty.append(qty_content)
@@ -46,7 +47,7 @@ class Inventory:
         filename = os.path.join(here, 'inventory.txt')
         f = open(filename, "New Inventory")
         f.write(isbn + "," + title + ", " + author + ", " + genre + ", " + qty + ", " + price)
-        f.close
+        f.close()
 
 
 
