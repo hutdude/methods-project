@@ -1,1 +1,13 @@
+formatting:
 
+<ISBN>, <Title>, <Author>, <Genre> <Quantity>, <Price>
+<9780307763051>, <Jurassic Park>, <Micheal Criton>, <Nonfiction>, <8>, <74.95>
+<9780141924403>, <Percy Jackson and the Olympians: The Lightning Thief>, <Rick Riordian>, <Fantasy>, <3>, <14.99>
+<9780033332170>, <Great Expectations>, <Charles Dickens>, <Nonfiction>, <2>, <7.99>
+<9780678048213>, <Maid>, <Stephanie Land>, <Fiction>, <1>, <4.00>
+<9780745124687>, <A Song of Ice and Fire>, <Fiction>, <4>, <99>
+<9780000364485>, <Eragon, Christopher Paolini>, <Nonfiction>, <88>, <1000>
+<9780102515123>, <All the Bright Places>, <Jennifer Niven>, <Fiction>, <9>, <18>
+<9780214548789>, <Star Wars Epidsode 3: Revenge of the Sith>, <Nonfiction>, <3>, <3.99>
+<9780021454817>, <Twilight>, <Stephanie Meyer>, <Action-Adventure>, <4>, <33> 
+<9780978015878>, <Kane Chronicles: Red Pyramid>, <Rick Riordian>, <Fiction>, <8>, <9.99>  
