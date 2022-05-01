@@ -57,8 +57,8 @@ class Cart:
     def commitToFile(self):
         # opens file
         cartfile = open("cars.txt", "a")
-        # writes cart_id and customer_id
-        cartfile.write(str(self.Cart_id) + ", " + str(self.Customer_id) + ", ")
+        # writes cart_id, customer_id, price
+        cartfile.write(str(self.Cart_id) + ", " + str(self.Customer_id) + ", " + str(self.currentTotal) + ", ")
 
         # loops through isbn list and writes them to file and doesn't add delimeter after
         for x in self.ISBNs:
@@ -74,4 +74,3 @@ class Cart:
                 cartfile.write(y + ":")
 
         cartfile.close()
-

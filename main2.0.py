@@ -17,19 +17,32 @@ def preLoginLoop():
             # opens user file
             userfile = open("users.txt", "r")
             # loops through file to find if user is in file
-            # if the user is found and password is correct, it will send them to postLoginLoop
+            # if the user is found and password is correct, it will send them back to main
+
+            fnameTemp = ""
+            lnameTemp = ""
+            cardNTemp = 0
+            eDate = ""
+            secCodeTemp = 0
+            addTemp = ""
+            # ---------------Double check this with user file template
             for line in userfile:
-                usertemp = line.split(", ")
-                if usertemp == username:
-                    passtemp = line.split(", ")
+                usertempInfo = line.split(", ")
+                if usertempInfo[0] == username:
+                    passtemp = usertempInfo[1]
                     if passtemp == password:
+                        cardNTemp = usertempInfo[2]
+                        eDate = usertempInfo[3]
+                        secCodeTemp = usertempInfo[4]
+                        addTemp = usertempInfo[5]
                         found = True
                         break
             userfile.close()
             # if found, welcomes user and starts main menu
             if found:
                 print("Welcome " + username)
-                return True, username
+                yourUser = User(username, password, fnameTemp, lnameTemp, cardNTemp, eDate, secCodeTemp, addTemp)
+                return True, yourUser
             else:
                 print("Error logging in... Make sure your credentials are correct.\n")
                 print("If you do not have an account enter 3 to make one now.")
@@ -40,8 +53,8 @@ def preLoginLoop():
                 # checks to see if username is available and makes them create new one if it exists
                 checkfile = open("users.txt", "r")
                 for line in checkfile:
-                    usertemp = line.split(", ")
-                    if usertemp == newUsername:
+                    usertempLine = line.split(", ")
+                    if usertempLine[0] == newUsername:
                         print("Username already exists...")
                     else:
                         newPassword = input("Enter your desired password: ")
@@ -58,72 +71,19 @@ def preLoginLoop():
                         newState = input("\tState: ")
                         newZip = input("\tZip Code: ")
 
-                        userfile = open("userfile.txt", "a")
-                        userfile.write(newUsername, ", ", newPassword, ", ", newFirstName, ", ", newLastName, ", ",
-                                       newCardNum, ", ", newExpDate, ", ", newSecCode, ", ", newAddress, ", ", newCity,
-                                       ", ", newState, ", ", newZip)
+                        newUser = User(newUsername, newPassword, newFirstName, newLastName, newCardNum, newExpDate,
+                                       newSecCode, newAddress, )
+
                         print("User created successfully!")
-                        return True, newUsername
+                        return True, newUser
         elif choice == 3:
             sys.exit()
         else:
             print("Pick an option by selecting a number 1-3")
-            return False, "no"
+            return False
     except:
         print("Enter a number 1-3")
-        return False, "no"
-
-
-def postLoginLoop(username):
-    try:
-        choice = int(input(
-            "Select One of the following:\n1. View Books\n2. View Cart\n3. View Profile\n4. Logout\n5. Exit Program"))
-        if choice == 1:
-            # displays books, author, and price
-            i = 0
-            while i < len(bookList):
-                print("Item " + (i + 1) + ". ",
-                      bookList[i].getTitle() + " by " + bookList[i].getAuthor() + " - " + bookList[i].getPrice())
-                i += i
-
-            # then three options: add book to cart, view cart, return to menu
-
-            opt = int(input("Select an option:\n1. Add item to Cart\n2. View Cart\n3. Return to Menu"))
-            if opt == 1:
-                while 1:
-                    try:
-                        bookChoice = int(input("Which book would you like to add to your cart? (Enter item number..."))
-                        qtyChoice = int(input("How many would you like to add?"))
-                        # check to make sure valid input
-                        isbnChoice = bookList[bookChoice - 1].getISBN()
-                        priceChoice = bookList[bookChoice - 1].getPrice()
-                        yourCart.addItem(isbnChoice, qtyChoice, priceChoice)
-                        ourInv.EditQty(isbnChoice, )  # decrease inventory here
-
-                        break
-                    except:
-                        print("An error occurred, please try again")
-            elif opt == 2:
-                viewCart()
-            elif opt == 3:
-                preLoginLoop(username)
-        elif choice == 2:
-            # display cart and total, then three options: edit cart, checkout, return to menu
-            viewCart()
-        elif choice == 3:
-            # display basic info like name and user name, then four options:
-            # Edit info, view order history, delete account, return to menu
-            print("username: " + yourUser.getUsername())
-        elif choice == 4:
-            preLoginLoop(username)
-        elif choice == 5:
-            sys.exit()
-        else:
-            print("That was not a valid option...")
-            preLoginLoop(username)
-    except:
-        print("That was not a valid option...")
-        preLoginLoop(username)
+        return False
 
 
 # loop through cart books and display info
@@ -171,7 +131,7 @@ def main():
     while True:
         x, user = preLoginLoop()
         # work on instance of user, and then cart instance will be fixed
-        yourUser = User()
+        yourUser = user
         yourCart = Cart()
         while x:
             try:
@@ -244,23 +204,73 @@ def main():
                             contCartMenu = False
 
                 elif num1 == 3:  # view profile
-                    # display basic info like name and user name, then four options:
-                    # Edit info, view order history, delete account, back
-                    print("username: " + yourUser.getUsername())
-                    yourUser.printInfo()
-                    opt = int(input("1. Edit Personal Info\n2. View Order History\n3. Delete Account\n4. Back"))
-                    # makes sure valid option
-                    while opt != 1 and opt != 2 and opt != 3 and opt != 4:
+                    contProfMenu = True
+                    while contProfMenu:
+
+                        # display basic info like name and user name, then four options:
+                        # Edit info, view order history, delete account, back
+                        print("username: " + yourUser.getUsername())
+                        yourUser.printInfo()
                         opt = int(input("1. Edit Personal Info\n2. View Order History\n3. Delete Account\n4. Back"))
+                        # makes sure valid option
+                        while opt != 1 and opt != 2 and opt != 3 and opt != 4:
+                            opt = int(input("1. Edit Personal Info\n2. View Order History\n3. Delete Account\n4. Back"))
 
-                    if opt == 1:
-                        editChoice = int(input("What would you like to edit?\n\t1. Name\n\t2. Payment "
-                                               "Information\n\t3. Address\nOr press 4 to go back"))
-                        if editChoice == 1:
-                            fname = str(input("Enter your first name: "))
-                            lname = str(input("Enter your last name: "))
-                            yourUser.setName(fname, lname)
+                        # Edit Info loop
+                        if opt == 1:
+                            editChoice = int(input("What would you like to edit?\n\t1. Name\n\t2. Payment "
+                                                   "Information\n\t3. Address\nOr press 4 to go back"))
+                            # new name option
+                            if editChoice == 1:
+                                fname = str(input("Enter your first name: "))
+                                lname = str(input("Enter your last name: "))
+                                yourUser.setName(fname, lname)
 
+                            # new payment info
+                            elif editChoice == 2:
+                                cardNum = int(input("Enter your card number: "))
+                                secCode = int(input("Enter your card's security code: "))
+                                expDate = str(input("Enter your card's expiration date (MM/YY): "))
+                                yourUser.setPay(cardNum, expDate, secCode)
+
+                            # new address info
+                            elif editChoice == 3:
+                                street = str(input("Enter you street address: "))
+                                city = str(input("City: "))
+                                state = str(input("State: "))
+                                zipCode = int(input("Zip code: "))
+                                yourUser.setAdd(street, city, state, zipCode)
+
+                            # Delete account
+                            elif editChoice == 4:
+                                contProfMenu = False
+                            else:
+                                print("Not a valid choice... try again.")
+
+                        # view order history
+                        elif opt == 2:
+                            prevOrders = yourUser.getHist()
+                            cartFile = open("carts.txt", "r")
+                            j = 0
+                            # loop through each item in prevOrders
+                            while j < len(prevOrders):
+                                for line in cartFile:
+                                    cartID, userID, price, ISBNlist, QTYlist = line.split(", ")
+                                    if cartID == prevOrders[j]:
+                                        print("Order ID #" + cartID)
+                                        print("\tTotal: $" + price)
+                                        # could add more info if have time
+                            cartFile.close()
+
+                        elif opt == 3:
+                            # delete account
+                            yourUser.delProfile()  # check back on arguments for this
+                            contProfMenu = False
+                            x = False
+                            # check back on where to go in the menu from here
+
+                        elif opt == 4:
+                            contProfMenu = False
                 elif num1 == 4:
                     x = False  # sets overall variable to false to return to first while loop
 
