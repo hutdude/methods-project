@@ -3,12 +3,16 @@ class Cart:
     def __init__(self, Customer_id):
         self.Customer_id = Customer_id
 
-        self.Cart_id = 1
         cartfile = open("carts.txt", "r")
         # initilizes cart id variable at 1 and adds one for every existing cart id, makes new cart_id one more than current number
+        counter = 1
         for line in cartfile:
-            self.Cart_id += self.Cart_id
+            counter += 1
 
+        # makes sure cart_ids are four characters long
+        self.Cart_id = str(counter).zfill(4)
+
+        cartfile.close()
         self.ISBNs = []
         self.qtys = []
 
