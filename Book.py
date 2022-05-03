@@ -20,12 +20,14 @@ class Book:
         lines = file_contents.splitlines()
 
         for x in lines:
-            if x.split(", ") == self.isbn:
-                self.title = x.split(", ")
-                self.author = x.split(", ")
-                self.genre = x.split(", ")
-                self.amount = x.split(", ")
-                self.price = x
+            linelist = x.split(", ")
+            if linelist[0] == self.isbn:
+                self.title = linelist[1]
+                self.author = linelist[2]
+                self.genre = linelist[3]
+                self.amount = linelist[4]
+                self.price = linelist[5]
+                break
         f.close()
 
     def get_isbn(self):
@@ -47,13 +49,11 @@ class Book:
         return self.price
 
     def reduce_amount(self, qty):
-        if qty <= self.amount:
-            self.amount = self.amount - qty
+        if qty <= int(self.amount):
+            self.amount = str(int(self.amount) - qty)
             return True
-        if qty > self.amount:
+        if qty > int(self.amount):
             return False
 
     def increase_amount(self, qty):
         self.amount = self.amount + qty
-
-    def commit_to_file(self):

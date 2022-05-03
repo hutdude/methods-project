@@ -10,7 +10,8 @@ class Cart:
         filename = os.path.join(here, 'carts.txt')
 
         cartfile = open(filename, "r")
-        # initilizes cart id variable at 1 and adds one for every existing cart id, makes new cart_id one more than current number
+        # initializes cart id variable at 1 and adds one for every existing cart id, makes new cart_id one more than
+        # current number
         counter = 1
         for line in cartfile:
             counter += 1
@@ -33,9 +34,10 @@ class Cart:
         # if not, adds new isbn to list as well as qty, adjusts cart's current total
         self.ISBNs.append(ISBN)
         self.qtys.append(qty)
-        self.currentTotal = self.currentTotal + price * qty
+        self.currentTotal = self.currentTotal + float(price) * int(qty)
 
     def remItem(self, ISBN, qty, price):
+        price = int(price)
         for x in self.ISBNs:
             if x == ISBN:
                 # checks to make sure qty is a valid amount
@@ -69,21 +71,26 @@ class Cart:
 
     def commitToFile(self):
         # opens file
-        cartfile = open("cars.txt", "a")
+
+        here = os.path.dirname(os.path.abspath(__file__))
+        filename = os.path.join(here, "carts.txt")
+
+        cartfile = open(filename, "a")
         # writes cart_id, customer_id, price
-        cartfile.write(str(self.Cart_id) + ", " + str(self.Customer_id) + ", " + str(self.currentTotal) + ", ")
+        cartfile.write("\n" + str(self.Cart_id) + ", " + str(self.Customer_id) + ", " + "{:.2f}".format(self.currentTotal) + ", ")
 
         # loops through isbn list and writes them to file and doesn't add delimeter after
         for x in self.ISBNs:
             if self.ISBNs.index(x) == len(self.ISBNs) - 1:
-                cartfile.write(x + ", ")
-            cartfile.write(x + ":")
+                cartfile.write(str(x) + ", ")
+            else:
+                cartfile.write(str(x) + ":")
 
         # loops through qtys list and writes them to file, accounts for the last one and doesn't add delimeter after
         for y in self.qtys:
-            if self.qtys.index(y) == len(self.qtys) - 1:
-                cartfile.write(y + ", ")
+            if self.qtys.index(y) != len(self.qtys) - 1:
+                cartfile.write(str(y) + ":")
             else:
-                cartfile.write(y + ":")
+                cartfile.write(str(y))
 
         cartfile.close()

@@ -1,10 +1,8 @@
 dragonz, firefile, Ana, Morris, 1234123412341234, <03-23>, 872, <160 Dragon Lane-Eragon-MS-37754>, <0009-0015-0011>
 redacted, redacted, Tevin, Kelly, 6589658965896589, <07-25>, 625, <123 Dreary Lane-Muffin-MN-25689>, <0012>
 salad123, TomatoesAreAwesome, Michael, Crouton, 5412541254125412, <02-26>, 1235, <984 Crouton Road-Crouton-TN-45877>, <0014>
-hutonthefuton, Futonsaregr8, Huton, Futon, 8520852085208520, <08-22>, 565, <978 Lofi Street-Kentucky-KS-45621>, <0010-0013>
 redditAdmin, ChristopherJamalEvans, Neck, Beard, 8888999855598886, <08-99>, 255, <22 MomsBasement-Redacted-AK-15987>, <0008>
 sithrules, Onewiththedarks1de, Palpatine, Sith, 2222222222222222, <12-22>, 333, <222 Dark Street-Nabuu-NJ-12321>, <0007>
-codingLion, CODE, Lion, Code, 0100100001010010, <10-25>, 1564, <123 Coding Lane-Homescreen-CA-15624>, <0006>
-pizzaislove, pizzaislife, Me, Shrek, 7777777777777777, <07-27>, 1221, <666 Devil Boulevard-Hell-KS-25103>, <0005>
-loveofJD, PiratesRulez, Johnny Depp, 1561023048941598, <11-26>, 121, <252 Amber Hate Lane-Pirate-KS-15155>, <0002-0004>
+loveofJD, PiratesRulez, Johnny, Depp, 1561023048941598, <11-26>, 121, <252 Amber Hate Lane-Pirate-KS-15155>, <0002-0004>
 nothing, nothing0, Not, Thing, 0000000000000000, <03-23>, 325, <000 Nothing Street-Nothing-NE>, <0001-0003>
+hutdude, adminme, Huton, Smiff, 2384923874, <09-12>, 374, <<375 college view dr-starkville-ms-39759>>, <>
